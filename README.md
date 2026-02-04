@@ -1,80 +1,153 @@
-📒 Smart Contact Manager (SCM 2.0)
+# 📒 Smart Contact Manager
 
-A secure, full-stack Smart Contact Management System built using Java 21, Spring Boot, Spring Security, JPA, and Thymeleaf.
+A secure, full-stack **Smart Contact Management System** built using **Java 21**, **Spring Boot**, **Spring Security**, **JPA**, and **Thymeleaf**.  
 The application allows users to manage personal contacts with authentication, search, pagination, and profile management.
 
-🚀 Features
-🔐 Authentication & Security
+---
 
-Email & password login
+## 🚀 Features
 
-Google OAuth2 login
+### 🔐 Authentication & Security
+- Email & password login
+- Google OAuth2 login
+- Role-based access control
+- Secure session handling using Spring Security
 
-Role-based access control
+### 👤 User Management
+- User registration with email verification
+- User dashboard with statistics
+- Profile view & safe profile editing  
+  *(only allowed fields: about, phone, profile picture)*
 
-Secure session handling using Spring Security
+### 📇 Contact Management
+- Add, edit, delete contacts
+- Search contacts by:
+  - Name
+  - Email
+  - Phone number
+- Pagination & sorting
+- Export contacts to Excel
+- Secure access (users can only access their own contacts)
 
-👤 User Management
+### 🧠 Smart Design Choices
+- Backend-first architecture
+- Clean separation of concerns (Controller / Service / Repository)
+- Security checks at controller & service level
+- Minimal JS, server-driven UI
 
-User registration with email verification
+---
 
-User dashboard with statistics
+## 🛠 Tech Stack
 
-Profile view & safe profile editing
-(only allowed fields: about, phone, profile picture)
+**Backend**
+- Java **21**
+- Spring Boot
+- Spring Security
+- Spring Data JPA (Hibernate)
 
-📇 Contact Management
+**Frontend**
+- Thymeleaf
+- HTML / Tailwind CSS
+- Minimal JavaScript
 
-Add, edit, delete contacts
+**Database**
+- MySQL / PostgreSQL (configurable)
 
-Search contacts by:
+**Build Tool**
+- Maven
 
-Name
+---
 
-Email
+## 📁 Project Structure
+```
+src/main/java
+ ├── config        → Security & OAuth config
+ ├── controllers   → Web controllers
+ ├── entities      → JPA entities
+ ├── repositories  → JPA repositories
+ ├── services
+ │    ├── impl     → Business logic
+ ├── helpers       → Utility & constants
 
-Phone number
+src/main/resources
+ ├── templates     → Thymeleaf views
+ ├── static        → CSS / JS / images
+```
 
-Pagination & sorting
+## ⚙️ Setup & Run Locally
 
-Export contacts to Excel
+### 2️⃣ Configure Database
 
-Secure access (users can only access their own contacts)
+Create `application.properties` (not committed to GitHub):
 
-🧠 Smart Design Choices
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/scm
+spring.datasource.username=your_username
+spring.datasource.password=your_password
 
-Backend-first architecture
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
+### 3️⃣ Run the application
+mvn spring-boot:run
+Open in browser:
+```http://localhost:8081```
 
-Clean separation of concerns (Controller / Service / Repository)
+## 🔒 Security Highlights
 
-Security checks at controller & service level
+- CSRF protection handled via Spring Security
 
-Minimal JS, server-driven UI
+- Passwords encrypted using BCrypt
 
-#🛠 Tech Stack
+- OAuth users handled safely without password exposure
 
-Backend
+- Controller-level ownership checks to prevent data leaks
 
-Java 21
+## 📌 Design Decisions (Interview-Friendly)
 
-Spring Boot
+- No password change feature → intentionally excluded for simplicity & safety
 
-Spring Security
+- Email & username immutable → avoids identity inconsistency
 
-Spring Data JPA (Hibernate)
+- Backend validation preferred over JS
 
-Frontend
+- No heavy frontend frameworks → focus on core backend engineering
 
-Thymeleaf
+## 🧪 What This Project Demonstrates
 
-HTML / Tailwind CSS
+- Real-world Spring Boot application design
 
-Minimal JavaScript
+- Secure authentication & authorization
 
-Database
+- Clean JPA entity relationships
 
-MySQL / PostgreSQL (configurable)
+- Pagination, searching, and filtering
 
-Build Tool
+- Production-style backend structure
 
-Maven
+## 👨‍💻 Author
+Omprakash
+Backend Developer (Java | Spring Boot)
+
+_________________________________________________________________________________________________________________________________________________________________________________________________
+MIT License
+
+Copyright (c) 2026 Your Name
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
