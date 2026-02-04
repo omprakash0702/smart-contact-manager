@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
+>
+<head>
+  <title>Search Contacts</title>
+</head>
+
+<body>
+<div id="content">
+
+  <!-- Sidebar -->
+  <div th:if="${loggedInUser}">
+    <div th:replace="~{user/sidebar :: sidebar}"></div>
+  </div>
+
+  <div class="sm:pl-64 pt-20 px-6">
+
+    <!-- HEADER -->
+    <h1 class="text-4xl text-center mb-2">🔍 Search Results</h1>
+    <p class="text-center text-gray-500 mb-6"
+       th:text="${pageContact.totalElements} + ' results found'">
+    </p>
+
+    <!-- SEARCH BAR -->
+    <div
+      class="flex flex-wrap justify-between items-center bg-white dark:bg-gray-900 p-4 rounded gap-4">
+
+      <form
+        th:object="${contactSearchForm}"
+        th:action="@{'/user/contacts/search'}"
+        method="get"
+        class="flex flex-wrap gap-3"
+        onsubmit="return validateSearchSubmit()">
+
+        <select th:field="*{field}"
+                id="searchField"
+                class="border rounded px-3 py-2"
+                onchange="toggleSearchBtn()">
+          <option value="">Field</option>
+          <option value="name">Name</option>
+          <option value="phone">Phone</option>
+          <option value="email">Email</option>
+        </select>
+
+        <input
+          th:field="*{value}"
+          placeholder="Search..."
+          class="border rounded px-3 py-2"/>
+
+        <button
+          id="searchBtn"
+          type="submit"
+          disabled
+          class="px-4 py-2 bg-gray-400 text-white rounded cursor-not-allowed">
+          Search
+        </button>
+      </form>
+    </div>
+
+    <!-- TABLE -->
+    <div class="overflow-x-auto mt-6">
+
+      <table
+        th:if="${pageContact.totalElements > 0}"
+        class="w-full text-sm text-left border border-gray-200">
+
+        <thead class="bg-gray-100 dark:bg-gray-700">
+        <tr>
+          <th class="px-6 py-3">Name</th>
+          <th class="px-6 py-3">Phone</th>
+          <th class="px-6 py-3 text-center">Edit</th>
+          <th class="px-6 py-3 text-center">Delete</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr
+          th:each="c : ${pageContact.content}"
+          class="border-b hover:bg-gray-50 dark:hover:bg-gray-700">
+
+          <td class="px-6 py-4 flex items-center gap-3">
+            <span class="text-2xl">👤</span>
+            <div>
+              <div class="font-semibold" th:text="${c.name}">Name</div>
+              <div class="text-xs italic text-gray-400"
+                   th:text="${c.email ?: 'Not available'}"></div>
+            </div>
+          </td>
+
+          <td class="px-6 py-4 italic text-gray-500"
+              th:text="${c.phoneNumber ?: 'Not available'}">
+          </td>
+
+
+
+          <td class="px-6 py-4 text-center">
+            <a th:href="@{'/user/contacts/view/' + ${c.id}}" title="Edit">
+              ✏️
+            </a>
+          </td>
+
+          <td class="px-6 py-4 text-center">
+            <a th:href="@{'/user/contacts/delete/' + ${c.id}}"
+               onclick="return confirm('Delete this contact?')"
+               title="Delete">
+              🗑
+            </a>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+
+      <h2
+        th:if="${pageContact.totalElements == 0}"
+        class="text-center text-2xl p-6">
+        No contacts found
+      </h2>
+
+    </div>
+
+    <!-- PAGINATION -->
+    <div
+      th:if="${pageContact.totalPages > 1}"
+      class="text-center mt-6">
+
+      <a
+        th:each="i : ${#numbers.sequence(0, pageContact.totalPages-1)}"
+        th:href="@{'/user/contacts/search?page=' + ${i} +
+                  '&field=' + ${contactSearchForm.field} +
+                  '&value=' + ${contactSearchForm.value}}"
+        th:text="${i + 1}"
+        class="px-3 py-1 border mx-1 rounded"
+        th:classappend="${i == pageContact.number} ? 'bg-blue-600 text-white'">
+      </a>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTACT MODAL -->
+<div th:replace="~{user/contact_modals :: contact}"></div>
+
+<script th:src="@{'/js/contacts.js'}"></script>
+
+<script>
+  function validateSearchSubmit() {
+    return document.getElementById("searchField").value !== "";
+  }
+
+  function toggleSearchBtn() {
+    const field = document.getElementById("searchField").value;
+    const btn = document.getElementById("searchBtn");
+
+    btn.disabled = !field;
+
+    if (btn.disabled) {
+      btn.classList.remove("bg-gray-800");
+      btn.classList.add("bg-gray-400", "cursor-not-allowed");
+    } else {
+      btn.classList.remove("bg-gray-400", "cursor-not-allowed");
+      btn.classList.add("bg-gray-800");
+    }
+  }
+
+  // enforce rule on page load
+  document.addEventListener("DOMContentLoaded", toggleSearchBtn);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  th:replace="~{base :: parent(~{::#content},~{::title},~{})}"
+>
+  <head>
+    <title>Services | Smart Contact Manager</title>
+  </head>
+
+  <body>
+    <section
+      id="content"
+      class="p-6 max-w-5xl mx-auto dark:text-gray-200"
+    >
+      <h1 class="text-4xl font-bold mb-4">Our Services</h1>
+
+      <p class="text-gray-600 dark:text-gray-300 mb-6">
+        Smart Contact Manager provides a set of powerful services that help
+        users store, manage, and access their contacts securely from anywhere.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Service 1 -->
+        <div
+          class="p-5 bg-white dark:bg-gray-800 rounded-lg shadow"
+        >
+          <h2 class="text-xl font-semibold mb-2">
+            Secure Contact Storage
+          </h2>
+          <p class="text-gray-600 dark:text-gray-300">
+            Store all your contacts securely in the cloud with encrypted
+            passwords and protected access using Spring Security.
+          </p>
+        </div>
+
+        <!-- Service 2 -->
+        <div
+          class="p-5 bg-white dark:bg-gray-800 rounded-lg shadow"
+        >
+          <h2 class="text-xl font-semibold mb-2">
+            Contact Management
+          </h2>
+          <p class="text-gray-600 dark:text-gray-300">
+            Add, update, view, and delete contacts easily through a clean and
+            user-friendly dashboard.
+          </p>
+        </div>
+
+        <!-- Service 3 -->
+        <div
+          class="p-5 bg-white dark:bg-gray-800 rounded-lg shadow"
+        >
+          <h2 class="text-xl font-semibold mb-2">
+            Search & Filtering
+          </h2>
+          <p class="text-gray-600 dark:text-gray-300">
+            Quickly search contacts by name, email, or phone number to find
+            exactly what you need.
+          </p>
+        </div>
+
+        <!-- Service 4 -->
+        <div
+          class="p-5 bg-white dark:bg-gray-800 rounded-lg shadow"
+        >
+          <h2 class="text-xl font-semibold mb-2">
+            User Authentication
+          </h2>
+          <p class="text-gray-600 dark:text-gray-300">
+            Secure login system with email/password authentication and future
+            support for Google and GitHub OAuth login.
+          </p>
+        </div>
+
+        <!-- Service 5 -->
+        <div
+          class="p-5 bg-white dark:bg-gray-800 rounded-lg shadow"
+        >
+          <h2 class="text-xl font-semibold mb-2">
+            Cloud Accessibility
+          </h2>
+          <p class="text-gray-600 dark:text-gray-300">
+            Access your contacts anytime, anywhere from any device with an
+            internet connection.
+          </p>
+        </div>
+
+        <!-- Service 6 -->
+        <div
+          class="p-5 bg-white dark:bg-gray-800 rounded-lg shadow"
+        >
+          <h2 class="text-xl font-semibold mb-2">
+            Future Enhancements
+          </h2>
+          <p class="text-gray-600 dark:text-gray-300">
+            Planned features include email notifications, contact sharing,
+            analytics, and advanced role-based access control.
+          </p>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

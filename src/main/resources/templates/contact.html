@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
+>
+  <head>
+    <title>Contact Us | Smart Contact Manager</title>
+  </head>
+
+  <body>
+    <section
+      id="content"
+      class="p-6 max-w-4xl mx-auto dark:text-gray-200"
+    >
+      <h1 class="text-4xl font-bold mb-4">Contact Us</h1>
+
+      <p class="text-gray-600 dark:text-gray-300 mb-6">
+        Have questions, feedback, or suggestions about Smart Contact Manager?
+        Feel free to reach out. We’d love to hear from you.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Contact Info -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+          <h2 class="text-xl font-semibold mb-3">Get in Touch</h2>
+
+          <p class="mb-2">
+            <i class="fa-solid fa-envelope mr-2"></i>
+            support@scm.com
+          </p>
+
+          <p class="mb-2">
+            <i class="fa-solid fa-phone mr-2"></i>
+            +91 98765 43210
+          </p>
+
+          <p class="mb-2">
+            <i class="fa-solid fa-location-dot mr-2"></i>
+            India
+          </p>
+
+          <p class="text-gray-500 dark:text-gray-400 mt-4">
+            Our support team usually responds within 24 hours.
+          </p>
+        </div>
+
+        <!-- Contact Form (UI only for now) -->
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+          <h2 class="text-xl font-semibold mb-3">Send a Message</h2>
+
+          <form>
+            <div class="mb-4">
+              <label class="block mb-1 text-sm">Your Name</label>
+              <input
+                type="text"
+                class="w-full p-2 rounded border dark:bg-gray-700 dark:border-gray-600"
+                placeholder="Enter your name"
+              />
+            </div>
+
+            <div class="mb-4">
+              <label class="block mb-1 text-sm">Your Email</label>
+              <input
+                type="email"
+                class="w-full p-2 rounded border dark:bg-gray-700 dark:border-gray-600"
+                placeholder="Enter your email"
+              />
+            </div>
+
+            <div class="mb-4">
+              <label class="block mb-1 text-sm">Message</label>
+              <textarea
+                rows="4"
+                class="w-full p-2 rounded border dark:bg-gray-700 dark:border-gray-600"
+                placeholder="Write your message here"
+              ></textarea>
+            </div>
+
+            <button
+              type="button"
+              class="px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-900 dark:bg-blue-700 dark:hover:bg-blue-800"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      console.log("Contact page loaded");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
+>
+<head>
+  <title th:text="${loggedInUser.name + ' | Profile'}">Profile</title>
+</head>
+
+<body>
+<div id="content">
+
+  <!-- Sidebar -->
+  <div th:if="${loggedInUser}">
+    <div th:replace="~{user/sidebar :: sidebar}"></div>
+  </div>
+
+  <div class="sm:pl-64 pt-24 flex justify-center">
+    <div class="max-w-xl w-full px-6 space-y-8">
+
+      <!-- 🔵 VIEW CONTACT (BLUE SHADE BOX) -->
+      <div class="border border-blue-300 bg-blue-50 rounded-xl p-6 text-center">
+        <div class="text-5xl mb-2">👤</div>
+
+        <h1 class="text-2xl font-semibold"
+            th:text="${loggedInUser.name}">
+          User Name
+        </h1>
+
+        <p class="text-sm text-gray-600"
+           th:text="${loggedInUser.email}">
+          email@example.com
+        </p>
+
+        <p class="mt-3 text-sm italic text-gray-600"
+           th:text="${loggedInUser.about ?: 'No bio added'}">
+          About
+        </p>
+      </div>
+
+      <!-- ✏️ EDIT PROFILE -->
+      <form id="profileForm"
+            th:action="@{/user/profile/update}"
+            method="post"
+            class="border border-gray-300 rounded-xl p-6 space-y-4">
+
+        <!-- NAME (LOCKED) -->
+        <div>
+          <label class="text-sm">Name</label>
+          <input type="text"
+                 th:value="${loggedInUser.name}"
+                 readonly
+                 class="w-full border px-3 py-2 rounded bg-gray-100">
+        </div>
+
+        <!-- EMAIL (LOCKED) -->
+        <div>
+          <label class="text-sm">Email</label>
+          <input type="email"
+                 th:value="${loggedInUser.email}"
+                 readonly
+                 class="w-full border px-3 py-2 rounded bg-gray-100">
+        </div>
+
+        <!-- PHONE -->
+        <div>
+          <label class="text-sm">Phone Number</label>
+          <input type="text"
+                 name="phoneNumber"
+                 th:value="${loggedInUser.phoneNumber}"
+                 class="w-full border px-3 py-2 rounded editable">
+        </div>
+
+        <!-- ABOUT -->
+        <div>
+          <label class="text-sm">About</label>
+          <textarea name="about"
+                    rows="4"
+                    class="w-full border px-3 py-2 rounded editable"
+                    th:text="${loggedInUser.about}">
+          </textarea>
+        </div>
+
+        <!-- SAVE BUTTON -->
+        <button id="saveBtn"
+                type="submit"
+                class="w-full py-2 rounded text-white bg-blue-600 transition">
+          💾 Save Changes
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const saveBtn = document.getElementById("saveBtn");
+  const editableFields = document.querySelectorAll(".editable");
+
+  let initialValues = [];
+
+  editableFields.forEach(el => {
+    initialValues.push(el.value);
+  });
+
+  editableFields.forEach((el, index) => {
+    el.addEventListener("input", () => {
+      if (el.value !== initialValues[index]) {
+        saveBtn.classList.remove("bg-blue-600");
+        saveBtn.classList.add("bg-green-600");
+      }
+    });
+  });
+
+  document.getElementById("profileForm")
+    .addEventListener("submit", () => {
+      saveBtn.classList.remove("bg-green-600");
+      saveBtn.classList.add("bg-blue-600");
+    });
+</script>
+
+</body>
+</html>

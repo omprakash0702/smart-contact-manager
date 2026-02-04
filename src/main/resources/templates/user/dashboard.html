@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
+>
+  <head>
+    <title data-th-text="${loggedInUser.name} + ' | Dashboard'">
+      Dashboard
+    </title>
+  </head>
+
+  <body>
+    <div id="content">
+      <!-- Sidebar -->
+      <div th:if="${loggedInUser}">
+        <div data-th-replace="~{user/sidebar :: sidebar}"></div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="sm:pl-64 pt-20 px-6">
+        <!-- Welcome Section -->
+        <div class="mb-10">
+          <h1 class="text-4xl font-bold mb-2">
+            Welcome, <span data-th-text="${loggedInUser.name}"></span> 👋
+          </h1>
+          <p class="text-gray-600 dark:text-gray-300">
+            Manage your contacts, update your profile, and access your data
+            securely from here.
+          </p>
+        </div>
+
+        <!-- Dashboard Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Total Contacts -->
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-2">Total Contacts</h2>
+            <p class="text-4xl font-bold text-blue-600">
+              <span data-th-text="${totalContacts != null ? totalContacts : 0}">
+                0
+              </span>
+            </p>
+            <p class="text-gray-500 dark:text-gray-400 mt-2">
+              Contacts saved in your account
+            </p>
+          </div>
+
+          <!-- Favorites -->
+
+          <!-- Account Status -->
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+            <h2 class="text-xl font-semibold mb-2">Account Status</h2>
+
+            <p
+              class="text-lg font-semibold"
+              data-th-if="${loggedInUser.enabled}"
+            >
+              <span class="text-green-600">Active</span>
+            </p>
+
+            <p
+              class="text-lg font-semibold"
+              data-th-unless="${loggedInUser.enabled}"
+            >
+              <span class="text-red-600">Inactive</span>
+            </p>
+
+            <p class="text-gray-500 dark:text-gray-400 mt-2">
+              Email verification status
+            </p>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="mt-12">
+          <h2 class="text-2xl font-semibold mb-4">Quick Actions</h2>
+
+          <div class="flex flex-wrap gap-4">
+            <a
+              data-th-href="@{'/user/contacts'}"
+              class="px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800"
+            >
+              View Contacts
+            </a>
+
+            <a
+              data-th-href="@{'/user/contacts/add'}"
+              class="px-4 py-2 bg-green-700 text-white rounded hover:bg-green-800"
+            >
+              Add New Contact
+            </a>
+
+            <a
+               href="javascript:void(0)"
+  onclick="alert('🚧 Edit Profile feature is coming soon!')"
+              data-th-href="@{'/user/profile'}"
+              class="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+            >
+              Edit Profile
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      console.log("Dashboard page loaded");
+    </script>
+  </body>
+</html>

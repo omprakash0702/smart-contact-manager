@@ -1,0 +1,159 @@
+<nav
+  th:fragment="user-navbar"
+  class="bg-white border-b border-gray-200 shadow-sm dark:bg-gray-900 sm:pl-64 fixed w-full top-0 left-0 right-0 z-40"
+>
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+
+    <!-- SIDEBAR TOGGLE (MOBILE) -->
+    <button
+      data-drawer-target="logo-sidebar"
+      data-drawer-toggle="logo-sidebar"
+      aria-controls="logo-sidebar"
+      type="button"
+      class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+    >
+      <span class="sr-only">Open sidebar</span>
+      ☰
+    </button>
+
+    <!-- BRAND -->
+    <a
+      data-th-href="@{'/'}"
+      class="flex items-center gap-3"
+    >
+      <span class="text-3xl">📇</span>
+
+      <div class="flex flex-col leading-tight">
+        <span
+          class="text-xl font-extrabold tracking-wide text-blue-600 dark:text-blue-400"
+        >
+          SCM
+        </span>
+        <span
+          class="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400"
+        >
+          Smart Contact Manager
+        </span>
+      </div>
+    </a>
+
+    <!-- RIGHT ACTIONS -->
+    <div class="flex gap-3 md:order-2 items-center">
+
+<button
+  id="theme_change_button"
+  class="bg-gray-200 px-3 py-2 rounded-lg dark:bg-gray-600"
+>
+  <i class="fa-solid fa-circle-half-stroke"></i> <span>Light</span>
+</button>
+
+
+      <!-- PROFILE (DESKTOP) -->
+      <a
+        data-th-href="@{'/user/profile'}"
+        class="hidden md:flex items-center gap-1 px-3 py-2 rounded-lg
+               bg-green-700 text-white text-sm hover:bg-green-800"
+      >
+        👤 <span data-th-text="${loggedInUser.name}">User</span>
+      </a>
+
+      <!-- LOGOUT (DESKTOP – WORKING) -->
+      <form
+        th:action="@{'/logout'}"
+        method="post"
+        class="hidden md:block"
+      >
+        <button
+          type="submit"
+          class="px-3 py-2 rounded-lg bg-red-500 text-white text-sm hover:bg-red-600"
+        >
+          🚪 Logout
+        </button>
+      </form>
+
+      <!-- MOBILE MENU BUTTON -->
+      <button
+        data-collapse-toggle="navbar-cta"
+        type="button"
+        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        aria-controls="navbar-cta"
+        aria-expanded="false"
+      >
+        <span class="sr-only">Open main menu</span>
+        ☰
+      </button>
+    </div>
+
+    <!-- NAV LINKS (MOBILE + DESKTOP) -->
+    <div
+      class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
+      id="navbar-cta"
+    >
+      <ul
+        class="flex flex-col md:flex-row md:space-x-8 font-medium mt-4 md:mt-0
+               bg-gray-50 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900
+               p-4 md:p-0 rounded-lg md:rounded-none"
+      >
+        <li>
+          <a
+            data-th-href="@{'/home'}"
+            class="block py-2 px-3 text-blue-700 dark:text-blue-400 font-semibold"
+          >
+            Home
+          </a>
+        </li>
+
+        <li>
+          <a
+            data-th-href="@{'/about'}"
+            class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:text-blue-600"
+          >
+            About
+          </a>
+        </li>
+
+        <li>
+          <a
+            data-th-href="@{'/services'}"
+            class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:text-blue-600"
+          >
+            Services
+          </a>
+        </li>
+
+        <li>
+          <a
+            data-th-href="@{'/contact'}"
+            class="block py-2 px-3 text-gray-700 dark:text-gray-300 hover:text-blue-600"
+          >
+            Contact
+          </a>
+        </li>
+
+        <!-- MOBILE PROFILE -->
+        <li class="md:hidden">
+          <a
+            data-th-href="@{'/user/profile'}"
+            class="block py-2 px-3 rounded-lg bg-green-700 text-white text-center"
+          >
+            👤 <span data-th-text="${loggedInUser.name}">Profile</span>
+          </a>
+        </li>
+
+        <!-- MOBILE LOGOUT (WORKING) -->
+        <li class="md:hidden">
+          <form th:action="@{'/logout'}" method="post">
+            <button
+              type="submit"
+              class="w-full py-2 px-3 rounded-lg bg-red-500 text-white"
+            >
+              🚪 Logout
+            </button>
+          </form>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</nav>

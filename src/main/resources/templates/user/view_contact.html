@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}"
+>
+<head>
+  <title>View Contact</title>
+</head>
+
+<body>
+<div id="content">
+
+  <!-- Sidebar -->
+  <div th:if="${loggedInUser}">
+    <div th:replace="~{user/sidebar :: sidebar}"></div>
+  </div>
+
+  <div class="sm:pl-64 pt-24 flex justify-center">
+
+    <div class="max-w-lg w-full px-6">
+
+      <!-- HEADER -->
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-semibold text-blue-700">
+          👁️ View Contact
+        </h1>
+        <p class="text-gray-500 text-sm">
+          Contact details (read only)
+        </p>
+      </div>
+
+      <!-- CONTACT CARD -->
+      <div
+        class="border border-blue-300 bg-blue-50
+               rounded-xl p-6 space-y-4">
+
+        <!-- Name -->
+        <div>
+          <label class="text-sm text-gray-500">Name</label>
+          <div class="font-semibold text-lg"
+               th:text="${contact.name}">
+            Name
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <label class="text-sm text-gray-500">Email</label>
+          <div class="italic text-gray-700"
+               th:text="${contact.email ?: 'Not available'}">
+            Email
+          </div>
+        </div>
+
+        <!-- Phone -->
+        <div>
+          <label class="text-sm text-gray-500">Phone</label>
+          <div class="italic text-gray-700"
+               th:text="${contact.phoneNumber ?: 'Not available'}">
+            Phone
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div>
+          <label class="text-sm text-gray-500">Address</label>
+          <div class="italic text-gray-700"
+               th:text="${contact.address ?: 'Not available'}">
+            Address
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label class="text-sm text-gray-500">Description</label>
+          <div class="italic text-gray-700"
+               th:text="${contact.description ?: 'Not available'}">
+            Description
+          </div>
+        </div>
+
+        <!-- Links -->
+        <div class="pt-2 space-y-2">
+
+          <div th:if="${contact.websiteLink}">
+            🌐
+            <a th:href="${contact.websiteLink}"
+               target="_blank"
+               class="text-blue-600 underline">
+              Website
+            </a>
+          </div>
+
+          <div th:if="${contact.linkedInLink}">
+            💼
+            <a th:href="${contact.linkedInLink}"
+               target="_blank"
+               class="text-blue-600 underline">
+              LinkedIn
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="flex justify-center gap-6 mt-8">
+
+        <a th:href="@{'/user/contacts'}"
+           class="px-4 py-2 border rounded text-gray-700 hover:bg-gray-100">
+          ⬅ Back
+        </a>
+
+        <a th:href="@{'/user/contacts/view/' + ${contact.id}}"
+           class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+          ✏️ Edit
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
